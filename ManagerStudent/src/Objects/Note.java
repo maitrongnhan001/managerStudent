@@ -4,51 +4,51 @@
  * and open the template in the editor.
  */
 package Objects;
-import Objects.Date;
+
+import Objects.NoteList;
 /**
  *
  * @author mrx
  */
-public class Note extends Date{
+public class Note extends NoteList{
+    private NoteList noteList;
+    private int STT;
     private String Content;
-    private Date DayWrite;
-    //cac ham init
+    //funtion init
     public Note(){
-        Content=new String();
-        DayWrite=new Date();
+        noteList =new NoteList();
+        STT=0;
+        Content=new String("Enter note");
     }
-    public Note(String content){
+    public Note(NoteList nls,int stt,String content){
+        noteList =new NoteList(nls);
+        STT=stt;
         Content=new String(content);
-        DayWrite=new Date();
     }
-    public Note(Note note){
-        Content=new String(note.Content);
-        DayWrite=new Date(note.DayWrite);
+    //funtion set data
+    public void setAllData(NoteList nls,int stt,String content){
+        noteList =new NoteList(nls);
+        STT=stt;
+        Content=new String(content);
     }
-    //ham set du lieu
-    public void set(String content,Date day){
+    public void setStt(int stt){
+        STT=stt;
+    }
+    public void setNoteList(NoteList nls){
+        noteList=nls;
+    }
+    public void setContent(String content){
         Content=content;
-        DayWrite=day;
     }
-    public void set(Note note){
-        Content=note.Content;
-        DayWrite=note.DayWrite;
+    //funtion get data
+    public int getStt(){
+        return STT;
     }
-    //ham get du lieu
-    public Note get(){
-        Note note=new Note();
-        note.Content=Content;
-        note.DayWrite=DayWrite;
-        return note;
+    public NoteList getNoteList(){
+        return noteList;
     }
-    public String getConten(){
+    public String getContent(){
         return Content;
-    }
-    public Date getDayWrite(){
-        return DayWrite;
-    }
-    public String toStirng(){
-        return Content+ " - " + DayWrite;
     }
 }
 

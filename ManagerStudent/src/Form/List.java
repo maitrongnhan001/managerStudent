@@ -1101,56 +1101,64 @@ public class List extends javax.swing.JFrame {
     /*----------moved over form list stack-------------*/
     private void btnList1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnList1ActionPerformed
         // TODO add your handling code here:
-        ListTaskForm listTaskForm =new ListTaskForm(this,noteList1.getID());
+        noteList1.set(1, btnList1.getText());
+        ListTaskForm listTaskForm =new ListTaskForm(this,noteList1);
         listTaskForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnList1ActionPerformed
 
     private void btnList2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnList2ActionPerformed
         // TODO add your handling code here:
-        ListTaskForm listTaskForm =new ListTaskForm(this,noteList2.getID());
+        noteList2.set(2, btnList2.getText());
+        ListTaskForm listTaskForm =new ListTaskForm(this,noteList2);
         listTaskForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnList2ActionPerformed
 
     private void btnList3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnList3ActionPerformed
         // TODO add your handling code here:
-        ListTaskForm listTaskForm =new ListTaskForm(this,noteList3.getID());
+        noteList3.set(3, btnList3.getText());
+        ListTaskForm listTaskForm =new ListTaskForm(this,noteList3);
         listTaskForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnList3ActionPerformed
 
     private void btnList4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnList4ActionPerformed
         // TODO add your handling code here:
-        ListTaskForm listTaskForm =new ListTaskForm(this,noteList4.getID());
+        noteList4.set(4, btnList4.getText());
+        ListTaskForm listTaskForm =new ListTaskForm(this,noteList4);
         listTaskForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnList4ActionPerformed
 
     private void btnList5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnList5ActionPerformed
         // TODO add your handling code here:
-        ListTaskForm listTaskForm =new ListTaskForm(this,noteList5.getID());
+        noteList5.set(5, btnList5.getText());
+        ListTaskForm listTaskForm =new ListTaskForm(this,noteList5);
         listTaskForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnList5ActionPerformed
 
     private void btnList6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnList6ActionPerformed
         // TODO add your handling code here:
-        ListTaskForm listTaskForm =new ListTaskForm(this,noteList6.getID());
+        noteList6.set(6, btnList6.getText());
+        ListTaskForm listTaskForm =new ListTaskForm(this,noteList6);
         listTaskForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnList6ActionPerformed
 
     private void btnList7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnList7ActionPerformed
         // TODO add your handling code here:
-        ListTaskForm listTaskForm =new ListTaskForm(this,noteList7.getID());
+        noteList7.set(7, btnList7.getText());
+        ListTaskForm listTaskForm =new ListTaskForm(this,noteList7);
         listTaskForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnList7ActionPerformed
 
     private void btnList8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnList8ActionPerformed
         // TODO add your handling code here:
-        ListTaskForm listTaskForm =new ListTaskForm(this,noteList8.getID());
+        noteList8.set(8, btnList8.getText());
+        ListTaskForm listTaskForm =new ListTaskForm(this,noteList8);
         listTaskForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnList8ActionPerformed
@@ -1158,6 +1166,11 @@ public class List extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
         form.setVisible(checkShowForm);
+        try {
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(List.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.dispose();
     }//GEN-LAST:event_formWindowClosing
 

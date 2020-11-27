@@ -223,6 +223,18 @@ public class Date {
         return day;
     }
     
+    public int getDay(){
+        return Day;
+    }
+    
+    public int getMounth(){
+        return Month;
+    }
+    
+    public int getYear(){
+        return Year;
+    }
+    
     public String toString(){
         return Day+" / "+Month+" / "+Year;
     }

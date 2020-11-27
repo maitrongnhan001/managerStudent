@@ -4,6 +4,15 @@
  * and open the template in the editor.
  */
 package Form;
+import Objects.Note;
+import Objects.NoteList;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,6 +26,27 @@ public class ListTaskForm extends javax.swing.JFrame {
     public ListTaskForm() {
         initComponents();
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        Note2.setVisible(false);
+        Note3.setVisible(false);
+        Note4.setVisible(false);
+        Note5.setVisible(false);
+        Note6.setVisible(false);
+        Note7.setVisible(false);
+        Note8.setVisible(false);
+        btn2.setVisible(false);
+        btn3.setVisible(false);
+        btn4.setVisible(false);
+        btn5.setVisible(false);
+        btn6.setVisible(false);
+        btn7.setVisible(false);
+        btn8.setVisible(false);
+        jCheckBox2.setVisible(false);
+        jCheckBox3.setVisible(false);
+        jCheckBox4.setVisible(false);
+        jCheckBox5.setVisible(false);
+        jCheckBox6.setVisible(false);
+        jCheckBox7.setVisible(false);
+        jCheckBox8.setVisible(false);
     }
     
     public ListTaskForm(MainFor mainForm) {
@@ -24,14 +54,58 @@ public class ListTaskForm extends javax.swing.JFrame {
         initComponents();
         form=mainForm;
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        Note2.setVisible(false);
+        Note3.setVisible(false);
+        Note4.setVisible(false);
+        Note5.setVisible(false);
+        Note6.setVisible(false);
+        Note7.setVisible(false);
+        Note8.setVisible(false);
+        btn2.setVisible(false);
+        btn3.setVisible(false);
+        btn4.setVisible(false);
+        btn5.setVisible(false);
+        btn6.setVisible(false);
+        btn7.setVisible(false);
+        btn8.setVisible(false);
+        jCheckBox2.setVisible(false);
+        jCheckBox3.setVisible(false);
+        jCheckBox4.setVisible(false);
+        jCheckBox5.setVisible(false);
+        jCheckBox6.setVisible(false);
+        jCheckBox7.setVisible(false);
+        jCheckBox8.setVisible(false);
     }
     
-    public ListTaskForm(List list,int id) {
-        ID=id;
+    public ListTaskForm(List list,NoteList noteList) {
+        nls=noteList;
+        stt=noteList.getID()*10;
         checkShowList=true;
         initComponents();
         listheigh=list;
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        Note2.setVisible(false);
+        Note3.setVisible(false);
+        Note4.setVisible(false);
+        Note5.setVisible(false);
+        Note6.setVisible(false);
+        Note7.setVisible(false);
+        Note8.setVisible(false);
+        btn2.setVisible(false);
+        btn3.setVisible(false);
+        btn4.setVisible(false);
+        btn5.setVisible(false);
+        btn6.setVisible(false);
+        btn7.setVisible(false);
+        btn8.setVisible(false);
+        jCheckBox2.setVisible(false);
+        jCheckBox3.setVisible(false);
+        jCheckBox4.setVisible(false);
+        jCheckBox5.setVisible(false);
+        jCheckBox6.setVisible(false);
+        jCheckBox7.setVisible(false);
+        jCheckBox8.setVisible(false);
+        System.out.println(stt);
     }
 
     /**
@@ -43,10 +117,19 @@ public class ListTaskForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        PanelMain = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        btnClear = new javax.swing.JButton();
+        Note7 = new javax.swing.JTextField();
+        jCheckBox8 = new javax.swing.JCheckBox();
+        Note8 = new javax.swing.JTextField();
+        btn2 = new javax.swing.JButton();
+        btn4 = new javax.swing.JButton();
+        btn5 = new javax.swing.JButton();
+        btn3 = new javax.swing.JButton();
+        btn7 = new javax.swing.JButton();
         jCheckBox1 = new javax.swing.JCheckBox();
+        btn8 = new javax.swing.JButton();
         Note1 = new javax.swing.JTextField();
+        btn6 = new javax.swing.JButton();
         btn1 = new javax.swing.JButton();
         jCheckBox2 = new javax.swing.JCheckBox();
         Note2 = new javax.swing.JTextField();
@@ -59,17 +142,6 @@ public class ListTaskForm extends javax.swing.JFrame {
         jCheckBox6 = new javax.swing.JCheckBox();
         Note6 = new javax.swing.JTextField();
         jCheckBox7 = new javax.swing.JCheckBox();
-        Note7 = new javax.swing.JTextField();
-        jCheckBox8 = new javax.swing.JCheckBox();
-        Note8 = new javax.swing.JTextField();
-        btn2 = new javax.swing.JButton();
-        btn4 = new javax.swing.JButton();
-        btn5 = new javax.swing.JButton();
-        btn3 = new javax.swing.JButton();
-        btn7 = new javax.swing.JButton();
-        btn8 = new javax.swing.JButton();
-        btn6 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("List task");
@@ -78,22 +150,85 @@ public class ListTaskForm extends javax.swing.JFrame {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
         });
 
-        PanelMain.setBackground(new java.awt.Color(168, 228, 236));
+        btnClear.setBackground(new java.awt.Color(199, 141, 215));
+        btnClear.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
+        btnClear.setText("Clear");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
+
+        Note7.setText("Enter note");
+
+        Note8.setText("Enter note");
+
+        btn2.setBackground(new java.awt.Color(199, 141, 215));
+        btn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn2ActionPerformed(evt);
+            }
+        });
+
+        btn4.setBackground(new java.awt.Color(199, 141, 215));
+        btn4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn4ActionPerformed(evt);
+            }
+        });
+
+        btn5.setBackground(new java.awt.Color(199, 141, 215));
+        btn5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn5ActionPerformed(evt);
+            }
+        });
+
+        btn3.setBackground(new java.awt.Color(199, 141, 215));
+        btn3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn3ActionPerformed(evt);
+            }
+        });
+
+        btn7.setBackground(new java.awt.Color(199, 141, 215));
+        btn7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn7ActionPerformed(evt);
+            }
+        });
+
+        btn8.setBackground(new java.awt.Color(199, 141, 215));
+        btn8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn8ActionPerformed(evt);
+            }
+        });
 
         Note1.setText("Enter note");
 
+        btn6.setBackground(new java.awt.Color(199, 141, 215));
+        btn6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn6ActionPerformed(evt);
+            }
+        });
+
         btn1.setBackground(new java.awt.Color(199, 141, 215));
+        btn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn1ActionPerformed(evt);
+            }
+        });
 
         Note2.setText("Enter note");
 
         Note3.setText("Enter note");
-        Note3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Note3ActionPerformed(evt);
-            }
-        });
 
         Note4.setText("Enter note");
 
@@ -101,210 +236,826 @@ public class ListTaskForm extends javax.swing.JFrame {
 
         Note6.setText("Enter note");
 
-        Note7.setText("Enter note");
-
-        Note8.setText("Enter note");
-
-        btn2.setBackground(new java.awt.Color(199, 141, 215));
-
-        btn4.setBackground(new java.awt.Color(199, 141, 215));
-
-        btn5.setBackground(new java.awt.Color(199, 141, 215));
-
-        btn3.setBackground(new java.awt.Color(199, 141, 215));
-
-        btn7.setBackground(new java.awt.Color(199, 141, 215));
-
-        btn8.setBackground(new java.awt.Color(199, 141, 215));
-
-        btn6.setBackground(new java.awt.Color(199, 141, 215));
-
-        jButton1.setBackground(new java.awt.Color(199, 141, 215));
-        jButton1.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
-        jButton1.setText("Clear");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout PanelMainLayout = new javax.swing.GroupLayout(PanelMain);
-        PanelMain.setLayout(PanelMainLayout);
-        PanelMainLayout.setHorizontalGroup(
-            PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelMainLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(PanelMainLayout.createSequentialGroup()
-                        .addGroup(PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(PanelMainLayout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(93, 93, 93)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(PanelMainLayout.createSequentialGroup()
-                                .addComponent(jCheckBox1)
-                                .addGap(18, 18, 18)
-                                .addComponent(Note1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(72, 72, 72)))
-                        .addGap(38, 38, 38))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelMainLayout.createSequentialGroup()
-                        .addGroup(PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btn1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelMainLayout.createSequentialGroup()
-                                    .addComponent(jCheckBox8)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(Note8, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btn8, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelMainLayout.createSequentialGroup()
-                                    .addComponent(jCheckBox3)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(Note3, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btn3, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelMainLayout.createSequentialGroup()
-                                    .addComponent(jCheckBox2)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(Note2, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btn2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelMainLayout.createSequentialGroup()
-                                    .addComponent(jCheckBox4)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(Note4, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btn4, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelMainLayout.createSequentialGroup()
-                                    .addComponent(jCheckBox5)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(Note5, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btn5, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelMainLayout.createSequentialGroup()
-                                    .addComponent(jCheckBox6)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(Note6, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btn6, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelMainLayout.createSequentialGroup()
-                                    .addComponent(jCheckBox7)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(Note7, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btn7, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
-        PanelMainLayout.setVerticalGroup(
-            PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelMainLayout.createSequentialGroup()
-                .addGroup(PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelMainLayout.createSequentialGroup()
-                        .addContainerGap(23, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30))
-                    .addGroup(PanelMainLayout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Note1)
-                    .addGroup(PanelMainLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jCheckBox1))
-                    .addComponent(btn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Note2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(PanelMainLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jCheckBox2))
-                    .addComponent(btn2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelMainLayout.createSequentialGroup()
-                        .addGroup(PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Note3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(PanelMainLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jCheckBox3)))
-                        .addGap(18, 18, 18)
-                        .addGroup(PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Note4, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(PanelMainLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jCheckBox4))
-                            .addComponent(btn4, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Note5, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(PanelMainLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jCheckBox5))
-                            .addComponent(btn5, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PanelMainLayout.createSequentialGroup()
-                                .addGroup(PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Note6, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(PanelMainLayout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addComponent(jCheckBox6)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Note7, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(PanelMainLayout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addComponent(jCheckBox7))
-                                    .addComponent(btn7, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Note8, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(PanelMainLayout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addComponent(jCheckBox8))
-                                    .addComponent(btn8, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(btn6, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(btn3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jCheckBox8)
+                                .addGap(18, 18, 18)
+                                .addComponent(Note8)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn8, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jCheckBox7)
+                                .addGap(18, 18, 18)
+                                .addComponent(Note7)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn7, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jCheckBox6)
+                                .addGap(18, 18, 18)
+                                .addComponent(Note6)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn6, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jCheckBox5)
+                                .addGap(18, 18, 18)
+                                .addComponent(Note5)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn5, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jCheckBox4)
+                                .addGap(18, 18, 18)
+                                .addComponent(Note4)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn4, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jCheckBox3)
+                                .addGap(18, 18, 18)
+                                .addComponent(Note3)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn3, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jCheckBox2)
+                                .addGap(18, 18, 18)
+                                .addComponent(Note2)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jCheckBox1)
+                                .addGap(18, 18, 18)
+                                .addComponent(Note1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(542, 542, 542)
+                        .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(88, 88, 88)
+                        .addComponent(jCheckBox1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Note1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Note2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jCheckBox2))
+                    .addComponent(btn2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Note3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jCheckBox3)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Note4, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jCheckBox4))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btn3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn4, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Note5, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jCheckBox5))
+                    .addComponent(btn5, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Note6, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jCheckBox6))
+                    .addComponent(btn6, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn7, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Note7, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jCheckBox7)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn8, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Note8, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jCheckBox8)))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Note3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Note3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Note3ActionPerformed
-
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
+        updateStatusJCheckBox();
         form.setVisible(checkShowForm);
         listheigh.setVisible(checkShowList);
         this.dispose();
     }//GEN-LAST:event_formWindowClosing
+    //------------funtion for program-----------------//
+    //add data to database
+    private void setData(int index){
+        try {
+            Statement s = con.createStatement();
+            String url="";
+            if(index==1 && Note1.getText().compareTo("")!=0 && Note1.getText().compareTo("Enter note")!=0){
+                stt=nls.getID()*10;
+                note1.setStt(stt+1);
+                note1.setContent(Note1.getText());
+                note1.setNoteList(nls);
+                url="insert into Note values ("+
+                        nls.getID()+","+note1.getStt()+",'"+note1.getContent()+"')";
+                s.executeUpdate(url);
+            }
+            if(index==2&& Note2.getText().compareTo("")!=0 && Note2.getText().compareTo("Enter note")!=0){
+                stt=nls.getID()*10;
+                note2.setStt(stt+2);
+                note2.setContent(Note2.getText());
+                note2.setNoteList(nls);
+                url="insert into Note values ("+
+                        nls.getID()+","+note2.getStt()+",'"+note2.getContent()+"')";
+                s.executeUpdate(url);
+            }
+            if(index==3 && Note3.getText().compareTo("")!=0 && Note3.getText().compareTo("Enter note")!=0){
+                stt=nls.getID()*10;
+                note3.setStt(stt+3);
+                note3.setContent(Note3.getText());
+                note3.setNoteList(nls);
+                url="insert into Note values ("+
+                        nls.getID()+","+note3.getStt()+",'"+note3.getContent()+"')";
+                s.executeUpdate(url);
+            }
+            if(index==4 && Note4.getText().compareTo("")!=0 && Note4.getText().compareTo("Enter note")!=0){
+                stt=nls.getID()*10;
+                note4.setStt(stt+4);
+                note4.setContent(Note4.getText());
+                note4.setNoteList(nls);
+                url="insert into Note values ("+
+                        nls.getID()+","+note4.getStt()+",'"+note4.getContent()+"')";
+                s.executeUpdate(url);
+            }
+            if(index==5 && Note5.getText().compareTo("")!=0 && Note5.getText().compareTo("Enter note")!=0){
+                stt=nls.getID()*10;
+                note5.setStt(stt+5);
+                note5.setContent(Note5.getText());
+                note1.setNoteList(nls);
+                url="insert into Note values ("+
+                        nls.getID()+","+note5.getStt()+",'"+note5.getContent()+"')";
+                s.executeUpdate(url);
+            }
+            if(index==6 && Note6.getText().compareTo("")!=0 && Note6.getText().compareTo("Enter note")!=0){
+                stt=nls.getID()*10;
+                note6.setStt(stt+6);
+                note6.setContent(Note6.getText());
+                note1.setNoteList(nls);
+                url="insert into Note values ("+
+                        nls.getID()+","+note6.getStt()+",'"+note6.getContent()+"')";
+                s.executeUpdate(url);
+            }
+            if(index==7 && Note7.getText().compareTo("")!=0 && Note7.getText().compareTo("Enter note")!=0){
+                stt=nls.getID()*10;
+                note7.setStt(stt+7);
+                note7.setContent(Note1.getText());
+                note7.setNoteList(nls);
+                url="insert into Note values ("+
+                        nls.getID()+","+note7.getStt()+",'"+note7.getContent()+"')";
+                s.executeUpdate(url);
+            }
+            if(index==8 && Note8.getText().compareTo("")!=0 && Note8.getText().compareTo("Enter note")!=0){
+                stt=nls.getID()*10;
+                note8.setStt(stt+8);
+                note8.setContent(Note8.getText());
+                note8.setNoteList(nls);
+                url="insert into Note values ("+
+                        nls.getID()+","+note8.getStt()+",'"+note8.getContent()+"')";
+                s.executeUpdate(url);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ListTaskForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    //select data from database
+    private void getData(){
+        String sql="";
+        try {
+            Statement s = con.createStatement();
+            //note1
+            sql="select * from Note";
+            ResultSet rs = s.executeQuery(sql);
+            while(rs.next()){
+                if(rs.getInt(2)==stt+1){
+                    note1.setAllData(nls, rs.getInt(2), rs.getString(3));
+                }
+                if(rs.getInt(2)==stt+2){
+                    note2.setAllData(nls, rs.getInt(2), rs.getString(3));
+                }
+                if(rs.getInt(2)==stt+3){
+                    note3.setAllData(nls, rs.getInt(2), rs.getString(3));
+                }
+                if(rs.getInt(2)==stt+4){
+                    note4.setAllData(nls, rs.getInt(2), rs.getString(3));
+                }
+                if(rs.getInt(2)==stt+5){
+                    note5.setAllData(nls, rs.getInt(2), rs.getString(3));
+                }
+                if(rs.getInt(2)==stt+6){
+                    note6.setAllData(nls, rs.getInt(2), rs.getString(3));
+                }
+                if(rs.getInt(2)==stt+7){
+                    note7.setAllData(nls, rs.getInt(2), rs.getString(3));
+                }
+                if(rs.getInt(2)==stt+8){
+                    note8.setAllData(nls, rs.getInt(2), rs.getString(3));
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ListTaskForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    //get status for jCheckBoxs
+    private void getStatusJCheckBox(){
+        try {
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("select * from SNote where stt="+(stt+1));
+            rs.next();
+            if(rs.getInt(1)==1){
+                jCheckBox1.setSelected(true);
+            }else{
+                jCheckBox1.setSelected(false);
+            }
+            rs = s.executeQuery("select * from SNote where stt="+(stt+2));
+            rs.next();
+            if(rs.getInt(1)==1){
+                jCheckBox2.setSelected(true);
+            }else{
+                jCheckBox2.setSelected(false);
+            }
+            rs = s.executeQuery("select * from SNote where stt="+(stt+3));
+            rs.next();
+            if(rs.getInt(1)==1){
+                jCheckBox3.setSelected(true);
+            }else{
+                jCheckBox3.setSelected(false);
+            }
+            rs = s.executeQuery("select * from SNote where stt="+(stt+4));
+            rs.next();
+            if(rs.getInt(1)==1){
+                jCheckBox4.setSelected(true);
+            }else{
+                jCheckBox4.setSelected(false);
+            }
+            rs = s.executeQuery("select * from SNote where stt="+(stt+5));
+            rs.next();
+            if(rs.getInt(1)==1){
+                jCheckBox5.setSelected(true);
+            }else{
+                jCheckBox5.setSelected(false);
+            }
+            rs = s.executeQuery("select * from SNote where stt="+(stt+6));
+            rs.next();
+            if(rs.getInt(1)==1){
+                jCheckBox6.setSelected(true);
+            }else{
+                jCheckBox6.setSelected(false);
+            }
+            rs = s.executeQuery("select * from SNote where stt="+(stt+7));
+            rs.next();
+            if(rs.getInt(1)==1){
+                jCheckBox7.setSelected(true);
+            }else{
+                jCheckBox7.setSelected(false);
+            }
+            rs = s.executeQuery("select * from SNote where stt="+(stt+8));
+            rs.next();
+            if(rs.getInt(1)==1){
+                jCheckBox8.setSelected(true);
+            }else{
+                jCheckBox8.setSelected(false);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ListTaskForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    //update data status for jCheckBoxs
+    private void updateStatusJCheckBox(){
+        try {
+            Statement s = con.createStatement();
+            if(jCheckBox1.isSelected()){
+                s.executeUpdate("update SNote set Status = 1 where stt=" +(stt+1));
+            }
+            else{
+                s.executeUpdate("update SNote set Status = 0 where stt=" + (stt+1));
+            }
+            if(jCheckBox2.isSelected()){
+                s.executeUpdate("update SNote set Status = 1 where stt=" +(stt+2));
+            }
+            else{
+                s.executeUpdate("update SNote set Status = 0 where stt=" + (stt+2));
+            }
+            if(jCheckBox3.isSelected()){
+                s.executeUpdate("update SNote set Status = 1 where stt=" +(stt+3));
+            }
+            else{
+                s.executeUpdate("update SNote set Status = 0 where stt=" + (stt+3));
+            }
+            if(jCheckBox4.isSelected()){
+                s.executeUpdate("update SNote set Status = 1 where stt=" +(stt+4));
+            }
+            else{
+                s.executeUpdate("update SNote set Status = 0 where stt=" + (stt+4));
+            }
+            if(jCheckBox5.isSelected()){
+                s.executeUpdate("update SNote set Status = 1 where stt=" +(stt+5));
+            }
+            else{
+                s.executeUpdate("update SNote set Status = 0 where stt=" + (stt+5));
+            }
+            if(jCheckBox6.isSelected()){
+                s.executeUpdate("update SNote set Status = 1 where stt=" +(stt+6));
+            }
+            else{
+                s.executeUpdate("update SNote set Status = 0 where stt=" + (stt+6));
+            }
+            if(jCheckBox7.isSelected()){
+                s.executeUpdate("update SNote set Status = 1 where stt=" +(stt+7));
+            }
+            else{
+                s.executeUpdate("update SNote set Status = 0 where stt=" + (stt+7));
+            }
+            if(jCheckBox8.isSelected()){
+                s.executeUpdate("update SNote set Status = 1 where stt=" +(stt+8));
+            }
+            else{
+                s.executeUpdate("update SNote set Status = 0 where stt=" + (stt+8));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ListTaskForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    //updata Object
+    private void update(){
+        Note1.setVisible(false);
+        Note2.setVisible(false);
+        Note3.setVisible(false);
+        Note4.setVisible(false);
+        Note5.setVisible(false);
+        Note6.setVisible(false);
+        Note7.setVisible(false);
+        Note8.setVisible(false);
+        btn1.setVisible(false);
+        btn2.setVisible(false);
+        btn3.setVisible(false);
+        btn4.setVisible(false);
+        btn5.setVisible(false);
+        btn6.setVisible(false);
+        btn7.setVisible(false);
+        btn8.setVisible(false);
+        
+        Note1.setText("Enter note");
+        Note2.setText("Enter note");
+        Note3.setText("Enter note");
+        Note4.setText("Enter note");
+        Note5.setText("Enter note");
+        Note6.setText("Enter note");
+        Note7.setText("Enter note");
+        Note8.setText("Enter note");
+        
+        jCheckBox1.setVisible(false);
+        jCheckBox2.setVisible(false);
+        jCheckBox3.setVisible(false);
+        jCheckBox4.setVisible(false);
+        jCheckBox5.setVisible(false);
+        jCheckBox6.setVisible(false);
+        jCheckBox7.setVisible(false);
+        jCheckBox8.setVisible(false);
+        
+        note1=new Note();
+        note2=new Note();
+        note3=new Note();
+        note4=new Note();
+        note5=new Note();
+        note6=new Note();
+        note7=new Note();
+        note8=new Note();
+        
+        getData();
+        
+        if(note1.getStt()==(stt+1)){
+            Note1.setText(note1.getContent());
+            Note1.setVisible(true);
+            jCheckBox1.setVisible(true);
+            btn1.setVisible(true);
+        }else{
+            jCheckBox1.setSelected(false);
+        }
+        if(note2.getStt()==(nls.getID()*10+2)){
+            Note2.setText(note2.getContent());
+            Note2.setVisible(true);
+            jCheckBox2.setVisible(true);
+            btn2.setVisible(true);
+        }else{
+            jCheckBox2.setSelected(false);
+        }
+        if(note3.getStt()==(nls.getID()*10+3)){
+            Note3.setText(note3.getContent());
+            Note3.setVisible(true);
+            jCheckBox3.setVisible(true);
+            btn3.setVisible(true);
+        }else{
+            jCheckBox3.setSelected(false);
+        }
+        if(note4.getStt()==(nls.getID()*10+4)){
+            Note4.setText(note4.getContent());
+            Note4.setVisible(true);
+            jCheckBox4.setVisible(true);
+            btn4.setVisible(true);
+        }else{
+            jCheckBox4.setSelected(false);
+        }
+        if(note5.getStt()==(nls.getID()*10+5)){
+            Note5.setText(note5.getContent());
+            Note5.setVisible(true);
+            jCheckBox5.setVisible(true);
+            btn5.setVisible(true);
+        }else{
+            jCheckBox5.setSelected(false);
+        }
+        if(note6.getStt()==(nls.getID()*10+6)){
+            Note6.setText(note6.getContent());
+            Note6.setVisible(true);
+            jCheckBox6.setVisible(true);
+            btn6.setVisible(true);
+        }else{
+            jCheckBox6.setSelected(false);
+        }
+        if(note7.getStt()==(nls.getID()*10+7)){
+            Note7.setText(note7.getContent());
+            Note7.setVisible(true);
+            jCheckBox7.setVisible(true);
+            btn7.setVisible(true);
+        }else{
+            jCheckBox7.setSelected(false);
+        }
+        if(note8.getStt()==(nls.getID()*10+8)){
+            Note8.setText(note8.getContent());
+            Note8.setVisible(true);
+            jCheckBox8.setVisible(true);
+            btn8.setVisible(true);
+        }else{
+            jCheckBox8.setSelected(false);
+        }
+        
+    }
+    //------------funtion handing event---------------//
+    //high objects on form
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        try {
+            // TODO add your handling code here:
+            Statement s = con.createStatement();
+            if(jCheckBox8.isSelected()){
+                s.executeUpdate("delete Note where stt=" + (stt+8));
+            }
+            if(jCheckBox7.isSelected()){
+                s.executeUpdate("delete Note where stt=" + (stt+7)); 
+                s.executeUpdate("update Note set stt="+(stt+7)+" where stt="+ stt+8);
+                jCheckBox7.setSelected(jCheckBox8.isSelected());
+            }
+            if(jCheckBox6.isSelected()){
+                s.executeUpdate("delete Note where stt=" + (stt+6));
+                s.executeUpdate("update Note set stt="+(stt+6)+" where stt="+ stt+7);
+                jCheckBox6.setSelected(jCheckBox7.isSelected());
+                s.executeUpdate("update Note set stt="+(stt+7)+" where stt="+ stt+8);
+                jCheckBox7.setSelected(jCheckBox8.isSelected());
+            }
+            if(jCheckBox5.isSelected()){
+                s.executeUpdate("delete Note where stt=" + (stt+5));
+                s.executeUpdate("update Note set stt="+(stt+5)+" where stt="+ stt+6);
+                jCheckBox5.setSelected(jCheckBox6.isSelected());
+                s.executeUpdate("update Note set stt="+(stt+6)+" where stt="+ stt+7);
+                jCheckBox6.setSelected(jCheckBox7.isSelected());
+                s.executeUpdate("update Note set stt="+(stt+7)+" where stt="+ stt+8);
+                jCheckBox7.setSelected(jCheckBox8.isSelected());
+            }
+            if(jCheckBox4.isSelected()){
+                s.executeUpdate("delete Note where stt=" + (stt+4)); 
+                s.executeUpdate("update Note set stt="+(stt+4)+" where stt="+ stt+5);
+                jCheckBox4.setSelected(jCheckBox5.isSelected());
+                s.executeUpdate("update Note set stt="+(stt+5)+" where stt="+ stt+6);
+                jCheckBox5.setSelected(jCheckBox6.isSelected());
+                s.executeUpdate("update Note set stt="+(stt+6)+" where stt="+ stt+7);
+                jCheckBox6.setSelected(jCheckBox7.isSelected());
+                s.executeUpdate("update Note set stt="+(stt+7)+" where stt="+ stt+8);
+                jCheckBox7.setSelected(jCheckBox8.isSelected());
+            }
+            if(jCheckBox3.isSelected()){
+                s.executeUpdate("delete Note where stt=" + (stt+3));
+                s.executeUpdate("update Note set stt="+(stt+3)+" where stt="+ stt+4);
+                jCheckBox3.setSelected(jCheckBox4.isSelected());
+                s.executeUpdate("update Note set stt="+(stt+4)+" where stt="+ stt+5);
+                jCheckBox4.setSelected(jCheckBox5.isSelected());
+                s.executeUpdate("update Note set stt="+(stt+5)+" where stt="+ stt+6);
+                jCheckBox5.setSelected(jCheckBox6.isSelected());
+                s.executeUpdate("update Note set stt="+(stt+6)+" where stt="+ stt+7);
+                jCheckBox6.setSelected(jCheckBox7.isSelected());
+                s.executeUpdate("update Note set stt="+(stt+7)+" where stt="+ stt+8);
+                jCheckBox7.setSelected(jCheckBox8.isSelected());
+            }
+            if(jCheckBox2.isSelected()){
+                s.executeUpdate("delete Note where stt=" + (stt+2));
+                s.executeUpdate("update Note set stt="+(stt+2)+" where stt="+ stt+3);
+                jCheckBox2.setSelected(jCheckBox3.isSelected());
+                s.executeUpdate("update Note set stt="+(stt+3)+" where stt="+ stt+4);
+                jCheckBox3.setSelected(jCheckBox4.isSelected());
+                s.executeUpdate("update Note set stt="+(stt+4)+" where stt="+ stt+5);
+                jCheckBox4.setSelected(jCheckBox5.isSelected());
+                s.executeUpdate("update Note set stt="+(stt+5)+" where stt="+ stt+6);
+                jCheckBox5.setSelected(jCheckBox6.isSelected());
+                s.executeUpdate("update Note set stt="+(stt+6)+" where stt="+ stt+7);
+                jCheckBox6.setSelected(jCheckBox7.isSelected());
+                s.executeUpdate("update Note set stt="+(stt+7)+" where stt="+ stt+8);
+                jCheckBox7.setSelected(jCheckBox8.isSelected());
+            }
+            if(jCheckBox1.isSelected()){
+                s.executeUpdate("delete Note where stt=" + (stt+1));
+                s.executeUpdate("update Note set stt="+(stt+1)+" where stt="+ stt+2);
+                jCheckBox1.setSelected(jCheckBox2.isSelected());
+                s.executeUpdate("update Note set stt="+(stt+2)+" where stt="+ stt+3);
+                jCheckBox2.setSelected(jCheckBox3.isSelected());
+                s.executeUpdate("update Note set stt="+(stt+3)+" where stt="+ stt+4);
+                jCheckBox3.setSelected(jCheckBox4.isSelected());
+                s.executeUpdate("update Note set stt="+(stt+4)+" where stt="+ stt+5);
+                jCheckBox4.setSelected(jCheckBox5.isSelected());
+                s.executeUpdate("update Note set stt="+(stt+5)+" where stt="+ stt+6);
+                jCheckBox5.setSelected(jCheckBox6.isSelected());
+                s.executeUpdate("update Note set stt="+(stt+6)+" where stt="+ stt+7);
+                jCheckBox6.setSelected(jCheckBox7.isSelected());
+                s.executeUpdate("update Note set stt="+(stt+7)+" where stt="+ stt+8);
+                jCheckBox7.setSelected(jCheckBox8.isSelected());
+            }
+            // update again object
+            update();
+        } catch (SQLException ex) {
+            Logger.getLogger(ListTaskForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(note1.getContent().compareTo("Enter note")==0){
+            jCheckBox1.setVisible(true);
+            note1=new Note();
+            Note1.setText("Enter note");
+            Note1.setVisible(true);
+            btn1.setVisible(true);
+        }
+    }//GEN-LAST:event_btnClearActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        try {
+            // TODO add your handling code here:
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String url="jdbc:sqlserver://DESKTOP-AHIBAGF\\SQLEXPRESS:1433;databaseName=ManagerStudentDatabase;user=sa;password=sa2008";
+            try {
+                con=DriverManager.getConnection(url);
+                getData();
+            } catch (SQLException ex) {
+                Logger.getLogger(ListTaskForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ListTaskForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        getStatusJCheckBox();
+        if(note1.getStt()==(stt+1)){
+            Note1.setText(note1.getContent());
+            Note1.setVisible(true);
+            jCheckBox1.setVisible(true);
+            btn1.setVisible(true);
+        }
+        if(note2.getStt()==(nls.getID()*10+2)){
+            Note2.setText(note2.getContent());
+            Note2.setVisible(true);
+            jCheckBox2.setVisible(true);
+            btn2.setVisible(true);
+        }
+        if(note3.getStt()==(nls.getID()*10+3)){
+            Note3.setText(note3.getContent());
+            Note3.setVisible(true);
+            jCheckBox3.setVisible(true);
+            btn3.setVisible(true);
+        }
+        if(note4.getStt()==(nls.getID()*10+4)){
+            Note4.setText(note4.getContent());
+            Note4.setVisible(true);
+            jCheckBox4.setVisible(true);
+            btn4.setVisible(true);
+        }
+        if(note5.getStt()==(nls.getID()*10+5)){
+            Note5.setText(note5.getContent());
+            Note5.setVisible(true);
+            jCheckBox5.setVisible(true);
+            btn5.setVisible(true);
+        }
+        if(note6.getStt()==(nls.getID()*10+6)){
+            Note6.setText(note6.getContent());
+            Note6.setVisible(true);
+            jCheckBox6.setVisible(true);
+            btn6.setVisible(true);
+        }
+        if(note7.getStt()==(nls.getID()*10+7)){
+            Note7.setText(note7.getContent());
+            Note7.setVisible(true);
+            jCheckBox7.setVisible(true);
+            btn7.setVisible(true);
+        }
+        if(note8.getStt()==(nls.getID()*10+8)){
+            Note8.setText(note8.getContent());
+            Note8.setVisible(true);
+            jCheckBox8.setVisible(true);
+            btn8.setVisible(true);
+        }
+        
+        
+    }//GEN-LAST:event_formWindowOpened
+
+    private void btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn1ActionPerformed
         // TODO add your handling code here:
-        Note1.setText("Enter Note");
-        Note2.setText("Enter Note");
-        Note3.setText("Enter Note");
-        Note4.setText("Enter Note");
-        Note5.setText("Enter Note");
-        Note6.setText("Enter Note");
-        Note7.setText("Enter Note");
-        Note8.setText("Enter Note");
-    }//GEN-LAST:event_jButton1ActionPerformed
+        //add objects for note
+        if(Note1.getText().compareTo("")!=0 && Note1.getText().compareTo("Enter note")!=0 && Note1.getText().compareTo(note1.getContent())!=0){
+            try {
+                 if(note1.getContent().compareTo("Enter note")==0){
+                    setData(1);
+                }
+                note1.setAllData(nls, stt+1, Note1.getText());
+                Statement s = con.createStatement();
+                s.executeUpdate("update Note set Content= '"+note1.getContent()+"' where stt="+note1.getStt());
+            } catch (SQLException ex) {
+                Logger.getLogger(ListTaskForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        jCheckBox2.setVisible(true);
+        Note2.setVisible(true);
+        btn2.setVisible(true);
+    }//GEN-LAST:event_btn1ActionPerformed
 
+    private void btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn2ActionPerformed
+        // TODO add your handling code here:
+        //add objects for note
+       if(Note2.getText().compareTo("")!=0 && Note2.getText().compareTo("Enter note")!=0 && Note2.getText().compareTo(note2.getContent())!=0){
+            try {
+                if(note2.getContent().compareTo("Enter note")==0){
+                    setData(2);
+                }
+                note2.setAllData(nls, stt+2, Note2.getText());
+                Statement s = con.createStatement();
+                s.executeUpdate("update Note set Content= '"+note2.getContent()+"' where stt="+note2.getStt());
+            } catch (SQLException ex) {
+                Logger.getLogger(ListTaskForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        jCheckBox3.setVisible(true);
+        Note3.setVisible(true);
+        btn3.setVisible(true);
+    }//GEN-LAST:event_btn2ActionPerformed
+
+    private void btn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn3ActionPerformed
+        // TODO add your handling code here:
+        //add objects for note
+        if(Note3.getText().compareTo("")!=0 && Note3.getText().compareTo("Enter note")!=0 && Note3.getText().compareTo(note3.getContent())!=0){
+            try {
+                if(note3.getContent().compareTo("Enter note")==0){
+                    setData(3);
+                }
+                note3.setAllData(nls, stt+3, Note3.getText());
+                Statement s = con.createStatement();
+                s.executeUpdate("update Note set Content= '"+note3.getContent()+"' where stt="+note3.getStt());
+            } catch (SQLException ex) {
+                Logger.getLogger(ListTaskForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        jCheckBox4.setVisible(true);
+        Note4.setVisible(true);
+        btn4.setVisible(true);
+    }//GEN-LAST:event_btn3ActionPerformed
+
+    private void btn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn4ActionPerformed
+        // TODO add your handling code here:
+        //add objects for note
+        if(Note4.getText().compareTo("")!=0 && Note4.getText().compareTo("Enter note")!=0 && Note4.getText().compareTo(note4.getContent())!=0){
+            try {
+                if(note4.getContent().compareTo("Enter note")==0){
+                    setData(4);
+                }
+                note4.setAllData(nls, stt+4, Note4.getText());
+                Statement s = con.createStatement();
+                s.executeUpdate("update Note set Content= '"+note4.getContent()+"' where stt="+note4.getStt());
+            } catch (SQLException ex) {
+                Logger.getLogger(ListTaskForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        jCheckBox5.setVisible(true);
+        Note5.setVisible(true);
+        btn5.setVisible(true);
+    }//GEN-LAST:event_btn4ActionPerformed
+
+    private void btn5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn5ActionPerformed
+        // TODO add your handling code here:
+        //add objects for note
+        if(Note5.getText().compareTo("")!=0 && Note5.getText().compareTo("Enter note")!=0 && Note5.getText().compareTo(note5.getContent())!=0){
+            try {
+                if(note5.getContent().compareTo("Enter note")==0){
+                    setData(5);
+                }
+                note5.setAllData(nls, stt+5, Note5.getText());
+                Statement s = con.createStatement();
+                s.executeUpdate("update Note set Content= '"+note5.getContent()+"' where stt="+note5.getStt());
+            } catch (SQLException ex) {
+                Logger.getLogger(ListTaskForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        jCheckBox6.setVisible(true);
+        Note6.setVisible(true);
+        btn6.setVisible(true);
+    }//GEN-LAST:event_btn5ActionPerformed
+
+    private void btn6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn6ActionPerformed
+        // TODO add your handling code here:
+        //add objects for note
+        if(Note6.getText().compareTo("")!=0 && Note6.getText().compareTo("Enter note")!=0 && Note6.getText().compareTo(note6.getContent())!=0){
+            try {
+                 if(note6.getContent().compareTo("Enter note")==0){
+                    setData(6);
+                }
+                note6.setAllData(nls, stt+6, Note6.getText());
+                Statement s = con.createStatement();
+                s.executeUpdate("update Note set Content= '"+note6.getContent()+"' where stt="+note6.getStt());
+            } catch (SQLException ex) {
+                Logger.getLogger(ListTaskForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        jCheckBox7.setVisible(true);
+        Note7.setVisible(true);
+        btn7.setVisible(true);
+    }//GEN-LAST:event_btn6ActionPerformed
+
+    private void btn7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn7ActionPerformed
+        // TODO add your handling code here:
+        //add objects for note
+        if(Note7.getText().compareTo("")!=0 && Note7.getText().compareTo("Enter note")!=0 && Note7.getText().compareTo(note7.getContent())!=0){
+            try {
+                if(note7.getContent().compareTo("Enter note")==0){
+                    setData(7);
+                }
+                note7.setAllData(nls, stt+7, Note7.getText());
+                Statement s = con.createStatement();
+                s.executeUpdate("update Note set Content= '"+note7.getContent()+"' where stt="+note7.getStt());
+            } catch (SQLException ex) {
+                Logger.getLogger(ListTaskForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        jCheckBox8.setVisible(true);
+        Note8.setVisible(true);
+        btn8.setVisible(true);
+    }//GEN-LAST:event_btn7ActionPerformed
+
+    private void btn8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn8ActionPerformed
+        // TODO add your handling code here:
+        if(Note8.getText().compareTo("")!=0 && Note8.getText().compareTo("Enter note")!=0 && Note8.getText().compareTo(note8.getContent())!=0){
+            try {
+                if(note8.getContent().compareTo("Enter note")==0){
+                    setData(8);
+                }
+                note8.setAllData(nls, stt+8, Note8.getText());
+                Statement s = con.createStatement();
+                s.executeUpdate("update Note set Content= '"+note8.getContent()+"' where stt="+note8.getStt());
+            } catch (SQLException ex) {
+                Logger.getLogger(ListTaskForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_btn8ActionPerformed
+
+   //----------------funtion main---------------------//
     /**
      * @param args the command line arguments
      */
@@ -339,8 +1090,19 @@ public class ListTaskForm extends javax.swing.JFrame {
             }
         });
     }
+    //decare objects
+    private Note note1 =  new Note();
+    private Note note2 =  new Note();
+    private Note note3 =  new Note();
+    private Note note4 =  new Note();
+    private Note note5 =  new Note();
+    private Note note6 =  new Note();
+    private Note note7 =  new Note();
+    private Note note8 =  new Note();
     //decare variable for class
-    private int ID;
+    private Connection con;
+    private int stt=0;
+    private NoteList nls=new NoteList();
     private MainFor form=new MainFor();
     private Boolean checkShowForm=false;
     private List listheigh=new List();
@@ -354,7 +1116,6 @@ public class ListTaskForm extends javax.swing.JFrame {
     private javax.swing.JTextField Note6;
     private javax.swing.JTextField Note7;
     private javax.swing.JTextField Note8;
-    private javax.swing.JPanel PanelMain;
     private javax.swing.JButton btn1;
     private javax.swing.JButton btn2;
     private javax.swing.JButton btn3;
@@ -363,7 +1124,7 @@ public class ListTaskForm extends javax.swing.JFrame {
     private javax.swing.JButton btn6;
     private javax.swing.JButton btn7;
     private javax.swing.JButton btn8;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnClear;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
@@ -372,6 +1133,5 @@ public class ListTaskForm extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox6;
     private javax.swing.JCheckBox jCheckBox7;
     private javax.swing.JCheckBox jCheckBox8;
-    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
