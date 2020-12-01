@@ -5,6 +5,15 @@
  */
 package Form;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author mrx
@@ -16,6 +25,7 @@ public class FormStudyPlan extends javax.swing.JFrame {
      */
     public FormStudyPlan() {
         initComponents();
+        model = (DefaultTableModel) tableSubject.getModel();
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     }
     
@@ -23,6 +33,7 @@ public class FormStudyPlan extends javax.swing.JFrame {
         found=true;
         initComponents();
         Form=form;
+        model = (DefaultTableModel) tableSubject.getModel();
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     }
 
@@ -36,28 +47,24 @@ public class FormStudyPlan extends javax.swing.JFrame {
     private void initComponents() {
 
         jCheckBox1 = new javax.swing.JCheckBox();
-        Content = new javax.swing.JPanel();
-        TextSubject = new javax.swing.JTextField();
-        ListSemester = new javax.swing.JComboBox<>();
+        lbNotification = new javax.swing.JLabel();
+        textNameSubject = new javax.swing.JTextField();
+        btnDelete = new javax.swing.JButton();
+        Semester = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         Year = new javax.swing.JComboBox<>();
-        Credits = new javax.swing.JComboBox<>();
+        Credis = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         btnSave = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        lbNameSubject = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        LbSubject1 = new javax.swing.JLabel();
-        LbSubject4 = new javax.swing.JLabel();
-        LbSubject2 = new javax.swing.JLabel();
-        LbSubject3 = new javax.swing.JLabel();
-        LbSubject6 = new javax.swing.JLabel();
-        LbSubject5 = new javax.swing.JLabel();
-        btnShow = new javax.swing.JButton();
-        ListSemester1 = new javax.swing.JComboBox<>();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        Year1 = new javax.swing.JComboBox<>();
+        textCodeSubject = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableSubject = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        textScore = new javax.swing.JTextField();
 
         jCheckBox1.setText("jCheckBox1");
 
@@ -68,16 +75,27 @@ public class FormStudyPlan extends javax.swing.JFrame {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
         });
 
-        Content.setBackground(new java.awt.Color(168, 228, 236));
+        lbNotification.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lbNotification.setText("notification");
 
-        TextSubject.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
-        TextSubject.setText("Enter your subject");
+        textNameSubject.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
 
-        ListSemester.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
-        ListSemester.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
-        ListSemester.setToolTipText("1\n2\n3\n");
+        btnDelete.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        Semester.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
+        Semester.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
+        Semester.setToolTipText("1\n2\n3\n");
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
         jLabel1.setText("Semester:");
@@ -88,149 +106,137 @@ public class FormStudyPlan extends javax.swing.JFrame {
         Year.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
         Year.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", " " }));
 
-        Credits.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
-        Credits.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", " " }));
+        Credis.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
+        Credis.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", " " }));
 
         jLabel3.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
-        jLabel3.setText("Credits:");
+        jLabel3.setText("Credis:");
 
         btnSave.setBackground(new java.awt.Color(199, 141, 215));
         btnSave.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
         btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
-        jPanel1.setBackground(new java.awt.Color(246, 238, 238));
+        lbNameSubject.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lbNameSubject.setText("Name subject:");
 
-        btnShow.setBackground(new java.awt.Color(199, 141, 215));
-        btnShow.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
-        btnShow.setText("Show");
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel4.setText("Code subject:");
 
-        ListSemester1.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
-        ListSemester1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
-        ListSemester1.setToolTipText("1\n2\n3\n");
+        textCodeSubject.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
-        jLabel11.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
-        jLabel11.setText("Semester:");
+        tableSubject.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.gray, new java.awt.Color(51, 51, 51), java.awt.Color.gray, java.awt.Color.gray));
+        tableSubject.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tableSubject.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        jLabel12.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
-        jLabel12.setText("Year:");
+            },
+            new String [] {
+                "Code subject", "Name subjext", "Semester", "Year", "Credis", "Score"
+            }
+        ));
+        jScrollPane1.setViewportView(tableSubject);
 
-        Year1.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
-        Year1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", " " }));
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel5.setText("Study plan");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LbSubject1, javax.swing.GroupLayout.PREFERRED_SIZE, 915, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LbSubject2, javax.swing.GroupLayout.PREFERRED_SIZE, 915, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LbSubject3, javax.swing.GroupLayout.PREFERRED_SIZE, 915, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LbSubject4, javax.swing.GroupLayout.PREFERRED_SIZE, 915, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LbSubject5, javax.swing.GroupLayout.PREFERRED_SIZE, 915, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LbSubject6, javax.swing.GroupLayout.PREFERRED_SIZE, 915, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 915, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(146, 146, 146)
-                        .addComponent(jLabel11)
-                        .addGap(4, 4, 4)
-                        .addComponent(ListSemester1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Year1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnShow, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(77, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(ListSemester1)
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(Year1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnShow, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(LbSubject1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(LbSubject2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(LbSubject3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(LbSubject4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(LbSubject5, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(LbSubject6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
-        );
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel6.setText("Score");
 
-        javax.swing.GroupLayout ContentLayout = new javax.swing.GroupLayout(Content);
-        Content.setLayout(ContentLayout);
-        ContentLayout.setHorizontalGroup(
-            ContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ContentLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(ContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(ContentLayout.createSequentialGroup()
-                        .addComponent(TextSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(jLabel1)
-                        .addGap(4, 4, 4)
-                        .addComponent(ListSemester, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Year, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)
-                        .addComponent(jLabel3)
-                        .addGap(4, 4, 4)
-                        .addComponent(Credits, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(49, Short.MAX_VALUE))
-        );
-        ContentLayout.setVerticalGroup(
-            ContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ContentLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(ContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TextSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ListSemester)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Year, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Credits, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
-        );
+        textScore.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(Content, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel1)
+                                    .addComponent(lbNameSubject))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(27, 27, 27)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(textCodeSubject)
+                                            .addComponent(textNameSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(52, 52, 52)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(textScore, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(Credis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(Year, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(Semester, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(lbNotification, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addComponent(btnSave)
+                                .addGap(58, 58, 58)
+                                .addComponent(btnDelete))
+                            .addComponent(jLabel6))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(58, 58, 58))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(583, 583, 583))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(Content, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(23, 23, 23)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lbNotification, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(textCodeSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(35, 35, 35)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(textNameSubject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbNameSubject))
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(Semester, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(Credis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(Year, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(jLabel6))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(textScore)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSave))
+                        .addGap(120, 120, 120))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 12, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31))))
         );
 
         pack();
@@ -239,8 +245,147 @@ public class FormStudyPlan extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
         Form.setVisible(found);
+        try {
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(FormStudyPlan.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.dispose();
     }//GEN-LAST:event_formWindowClosing
+
+    //funtion update
+    private void showTable(){
+        model.setRowCount(0);
+        try {
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("select * from Subject");
+            while(rs.next()){
+                Object row[]= new Object[6];
+                row[0]=rs.getString(1);
+                row[1]=rs.getString(2);
+                row[2]=rs.getInt(3);
+                row[3]=rs.getInt(4);
+                row[4]=rs.getInt(5);
+                row[5]=rs.getFloat(6);
+                model.addRow(row);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FormStudyPlan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    //funtion check data
+    private Boolean CheckData(){
+        if(textCodeSubject.getText().compareTo("")==0)
+            return false;
+        try {
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("select * from Subject");
+            while(rs.next()){
+                if(rs.getString(1).compareTo(textCodeSubject.getText())==0){
+                    UpdateData(textCodeSubject.getText());
+                    return false;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FormStudyPlan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(textNameSubject.getText().compareTo("")==0)
+            return false;
+        return true;
+    }
+    //Update data
+    private void UpdateData(String CodeSubject){
+        float Score=0;
+        try{
+            Score=Float.parseFloat(textScore.getText());
+        }catch(NumberFormatException e){
+            lbNotification.setText("text score wrong format");
+            return;
+        }
+        if(Score<0){
+            Score=0;
+        }
+        try {
+            Statement s = con.createStatement();
+            if(textNameSubject.getText().compareTo("")!=0){
+                s.executeUpdate("update Subject set NameSubject = '" + textNameSubject.getText() + "', Semester = " +
+                        Semester.getSelectedItem().toString() + ", Year = " +Year.getSelectedItem().toString() + ", "
+                                + "Credis = " + Credis.getSelectedItem().toString() + ", Score = " + Score
+                        + " where"+ " CodeSubject='" + CodeSubject + "'");
+            }else{
+                s.executeUpdate("update Subject set Semester = " +
+                        Semester.getSelectedItem().toString() + ", Year = " +Year.getSelectedItem().toString() + ", "
+                                + "Credis = " + Credis.getSelectedItem().toString() + ", Score = " + Score
+                        + " where"+ " CodeSubject='" + CodeSubject + "'");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FormStudyPlan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        showTable();
+    }
+    //Add data into database
+    private void AddData(){
+        if(CheckData()){
+            try {
+                float Score=0;
+                try{
+                    Score = Float.parseFloat(textScore.getText());
+                }catch(NumberFormatException e){
+                    Score = 0;
+                }
+                Statement s = con.createStatement();
+                s.executeUpdate("insert into Subject values ('"+textCodeSubject.getText() + "','"
+                        + textNameSubject.getText() + "',"+Semester.getSelectedItem().toString()
+                        + "," + Credis.getSelectedItem().toString() + "," + Year.getSelectedItem().toString() + ","
+                        + Score + ")");
+            } catch (SQLException ex) {
+                Logger.getLogger(FormStudyPlan.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        showTable();
+    }
+    
+    
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        try {
+            // TODO add your handling code here:
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try {
+                con = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-AHIBAGF\\SQLEXPRESS:1433;databaseName=ManagerStudentDatabase;user=sa;password=sa2008");
+            } catch (SQLException ex) {
+                Logger.getLogger(FormStudyPlan.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FormStudyPlan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        showTable();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // TODO add your handling code here:
+        AddData();
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        if(textCodeSubject.getText().compareTo("")!=0){
+            try {
+                Statement s = con.createStatement();
+                ResultSet rs = s.executeQuery("select * from Subject");
+                while(rs.next()){
+                    if(rs.getString(1).compareTo(textCodeSubject.getText())==0){
+                        s.executeUpdate("delete from Subject where CodeSubject = '" + textCodeSubject.getText() + "'");
+                        return;
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(FormStudyPlan.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+        showTable();
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -278,29 +423,29 @@ public class FormStudyPlan extends javax.swing.JFrame {
     }
     private Boolean found=false;
     private MainFor Form= new MainFor();
+    private Connection con;
+    private int ID;
+    private String CodeSubject=new String();
+    private DefaultTableModel model;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Content;
-    private javax.swing.JComboBox<String> Credits;
-    private javax.swing.JLabel LbSubject1;
-    private javax.swing.JLabel LbSubject2;
-    private javax.swing.JLabel LbSubject3;
-    private javax.swing.JLabel LbSubject4;
-    private javax.swing.JLabel LbSubject5;
-    private javax.swing.JLabel LbSubject6;
-    private javax.swing.JComboBox<String> ListSemester;
-    private javax.swing.JComboBox<String> ListSemester1;
-    private javax.swing.JTextField TextSubject;
+    private javax.swing.JComboBox<String> Credis;
+    private javax.swing.JComboBox<String> Semester;
     private javax.swing.JComboBox<String> Year;
-    private javax.swing.JComboBox<String> Year1;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSave;
-    private javax.swing.JButton btnShow;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbNameSubject;
+    private javax.swing.JLabel lbNotification;
+    private javax.swing.JTable tableSubject;
+    private javax.swing.JTextField textCodeSubject;
+    private javax.swing.JTextField textNameSubject;
+    private javax.swing.JTextField textScore;
     // End of variables declaration//GEN-END:variables
 }
